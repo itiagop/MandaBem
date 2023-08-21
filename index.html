@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog de Notícias</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+  <style>
+    /* Estilo geral */
+    body {
+      font-family: Poppins, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centralizar horizontalmente */
+      margin: 0;
+      padding: 0;
+      background-color: #F8F8FF; /* Cor de fundo */
+      border: 30px solid #F5F5F5; /* Adicionando bordas */
+    }
+
+    /* Estilo da navbar */
+    .navbar {
+      background-color: #f5f5f5; /* Cor de fundo da navbar */
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    nav a {
+      color: #333; /* Cor do texto na navbar */
+      text-decoration: none;
+    }
+
+    /* Estilo do header */
+    header {
+      background-color: #F08080; /* Cor de fundo do header em #FFB6C1 */
+      background-image: url('./img/Mandarin/imagem_header.png'); /* Substitua pelo caminho da imagem do header */
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 250px; /* Altura do header aumentada */
+      width: 100%; /* Largura do header */
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Justificar conteúdo verticalmente */
+      color: #ffffff; /* Cor do texto no header */
+      text-align: center;
+    }
+
+    /* Estilo do corpo (body) */
+    main {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start; /* Ajustar alinhamento vertical */
+      gap: 20px; /* Espaçamento entre os posts */
+    }    
+
+
+    /* Estilo do post em destaque */
+    .featured-post {
+      text-align: center;
+      background-color: #f8f8f8;
+      padding: 30px;
+      border: 1px solid #ddd;
+      width: 100%; /* Largura total */
+      max-width: 72%; /* Largura máxima para o post em destaque */
+      margin-bottom: 20px; /* Espaço abaixo do post em destaque */
+    }
+
+    .posts-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 1000px; /* Ajuste conforme necessário */
+      margin: 0 auto;
+    }
+
+    /* Estilo da nova div para alinhar à esquerda */
+    .post-info {
+      text-align: left;
+      margin-right: 20px;
+    }
+
+    /* Estilo para os botões de compartilhamento */
+    .social-share-container {
+      position: relative;
+    }
+
+    .social-share {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social-share a {
+      font-size: 20px;
+      margin: 0 5px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .social-share a:hover {
+      color: #FF4500; /* Cor quando o cursor está em cima do ícone */
+    }
+
+    /* Estilo para o botão "Ver" */
+    .read-more {
+      text-align: left;
+      margin: 10px;
+      position: relative; /* Necessário para posicionar as linhas multicoloridas */
+    }
+
+    .read-more a {
+      background-color: #FF4500;
+      color: #fff;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .read-more a:hover {
+      background-color: #FF6347;
+    }
+
+    /* Adicione a classe .posts-container para o novo container dos posts */
+    .posts-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1000px; /* Ajuste conforme necessário */
+      margin: 0 auto;
+    }
+
+    /* Define a largura dos posts dentro do container */
+    .post {
+      max-width: calc(33.33% - 20px);
+    }
+
+    /* Largura dos posts em telas menores */
+    @media (max-width: 768px) {
+      .post {
+        max-width: calc(50% - 20px);
+      }
+    }
+
+    .post-category {
+      margin-bottom: 5px; /* Ajuste o valor conforme necessário */
+      font-size: 12px;
+    }
+
+    .post-title {
+      font-size: 30px;
+      margin-bottom: 5px; /* Ajuste o valor conforme necessário */
+    }
+
+    .post-content {
+      font-size: 15px;
+      margin-bottom: 5px; /* Ajuste o valor conforme necessário */
+    }
+
+    .post-footnote {
+      font-size: 12px;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    /* Responsividade para os posts */
+    .post {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 10px;
+      max-width: 25%; /* Largura máxima para os posts reduzida em 15% */
+    }
+
+    .featured-post img {
+      width: 100%;
+      height: auto; /* Manter proporção */
+    }
+
+    @media (max-width: 768px) {
+      .post, .featured-post {
+        width: 80%; /* Reduzir a largura dos posts em telas menores */
+      }
+    }
+
+    /* Estilo do footer */
+    footer {
+      background-color: #FF4500; /* Cor de fundo da parte superior do footer */
+      color: #fff; /* Cor do texto no footer */
+      padding: 10px;
+      text-align: center;
+      position: relative;
+      width: 100%; /* Estender o background na largura da página */
+    }
+
+    .footer-image {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      background-color: #fff; /* Cor de fundo da parte inferior do footer */
+      padding: 10px;
+      color: #333; /* Cor do texto na parte inferior do footer */
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1></h1>
+  </header>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li><a href="#">Serviços</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Corpo (Body) -->
+  <main>
+
+    <!-- Post em destaque -->
+    <div class="featured-post">
+      <img src="./img/Mandarin/imagem1.jpg" alt="Imagem do Post 1">
+      <div class="post-info"> <!-- Div para agrupar o conteúdo -->
+        <p class="post-category">Inovação & Insight</p>
+        <h2 class="post-title">NRF 2020: conheça os top 5 assuntos do evento.</h2>
+        <p class="post-content">O maior evento sobre varejo do mundo mostrando as tendências, oportunidades e inovações para o setor.</p>
+        <p class="post-footnote">Fonte: CMO ADOBE</p>
+        <!-- Botão "Ver" para ler o post completo -->
+        <div class="read-more">
+          <a href="link-para-o-post-completo">Ver</a>
+        </div>
+        <!-- Botões de compartilhamento no canto inferior direito -->
+        <div class="social-share-container">
+          <div class="social-share">
+            <a href="link-do-compartilhamento-do-linkedin"><i class="fab fa-linkedin"></i></a>
+            <a href="link-do-compartilhamento-do-facebook"><i class="fab fa-facebook"></i></a>
+            <a href="link-do-compartilhamento-do-twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- post #2 -->
+      <div class="post">
+        <img src="./img/Mandarin/imagem2.jpg" alt="Imagem do Post 2">
+        <p class="post-category">Inovação & Insight</p>
+        <h3>WhatsApp terá função de pagamentos a partir de 2020.</h3>
+        <p class="post-footnote">Fonte: Proxxima</p>
+        <!--<p>Este é um exemplo de conteúdo para o terceiro post.</p>-->
+
+        <!-- Botão "Ver" para ler o post completo -->
+        <div class="read-more">
+          <a href="link-para-o-post-completo">Ver</a>
+        </div>
+
+        <!-- Botões de compartilhamento no canto inferior direito -->
+        <div class="social-share-container">
+          <div class="social-share">
+            <a href="link-do-compartilhamento-do-linkedin"><i class="fab fa-linkedin"></i></a>
+            <a href="link-do-compartilhamento-do-facebook"><i class="fab fa-facebook"></i></a>
+            <a href="link-do-compartilhamento-do-twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- post #3 -->
+      <div class="post">
+        <img src="./img/Mandarin/imagem3.jpg" alt="Imagem do Post 3">
+        <p class="post-category">Inovação & Insight</p>
+        <h3>Interações sociais cada vez mais imersas na tecnologia.</h3>
+        <p class="post-footnote">Fonte: Google Imagens</p>
+         <!--<p>Este é um exemplo de conteúdo para o quarto post.</p>-->
+
+        <!-- Botão "Ver" para ler o post completo -->
+        <div class="read-more">
+          <a href="link-para-o-post-completo">Ver</a>
+        </div>
+
+        <!-- Botões de compartilhamento no canto inferior direito -->
+        <div class="social-share-container">
+          <div class="social-share">
+            <a href="link-do-compartilhamento-do-linkedin"><i class="fab fa-linkedin"></i></a>
+            <a href="link-do-compartilhamento-do-facebook"><i class="fab fa-facebook"></i></a>
+            <a href="link-do-compartilhamento-do-twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+
+  </main>
+  <!-- Footer -->
+  <footer>
+    <img src="./img/Mandarin/imagem_do_footer.jpg" alt="Imagem do Footer" class="footer-image">
+  </footer>
+
+  <!-- Parte inferior do footer -->
+  <div class="footer-bottom">
+    <p>Copyright &copy; <i class="fab fa-mandarin"></i> Mandarin. Todos os direitos reservados.<br>
+    Caso não deseje mais receber nossos e-mails, por favor <a href="link-aqui">clique aqui</a>.
+    </p>
+  </div>
+</body>
+
+</html>
